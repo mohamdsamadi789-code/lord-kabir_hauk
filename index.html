@@ -1,11 +1,194 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>سایت من</title>
+<meta charset="UTF-8">
+<title>LORD KABIR SATELLITE SYSTEM</title>
+
+<style>
+body{
+margin:0;
+background:black;
+overflow:hidden;
+font-family:Consolas;
+color:#00ff66;
+}
+
+/* MATRIX */
+canvas{
+position:fixed;
+inset:0;
+z-index:-3;
+}
+
+/* CENTER SYSTEM */
+.container{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+}
+
+/* EARTH */
+.earth{
+width:180px;
+height:180px;
+border-radius:50%;
+background:radial-gradient(circle,#00ff66,#001a00);
+box-shadow:0 0 40px #00ff66;
+animation:spin 12s linear infinite;
+margin:auto;
+}
+
+@keyframes spin{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+/* ORBITS */
+.orbit{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:420px;
+height:420px;
+border:1px solid rgba(0,255,100,0.2);
+border-radius:50%;
+animation:rotate 10s linear infinite;
+}
+
+.orbit2{ animation-duration:15s; }
+.orbit3{ animation-duration:20s; }
+
+@keyframes rotate{
+from{transform:translate(-50%,-50%) rotate(0deg);}
+to{transform:translate(-50%,-50%) rotate(360deg);}
+}
+
+/* SATELLITE */
+.satellite{
+position:absolute;
+top:0;
+left:50%;
+transform:translateX(-50%);
+width:18px;
+height:18px;
+background:#00ff66;
+border-radius:50%;
+box-shadow:0 0 20px #00ff66;
+}
+
+/* TITLE */
+h1{
+font-size:40px;
+text-shadow:0 0 20px #00ff66;
+margin-bottom:20px;
+}
+
+/* STATUS */
+.status{
+margin-top:20px;
+line-height:1.8;
+font-size:16px;
+}
+
+/* PANEL */
+.panel{
+margin-top:20px;
+border:1px solid #00ff66;
+padding:10px;
+width:300px;
+margin-left:auto;
+margin-right:auto;
+}
+
+/* LOADING TEXT */
+.small{
+opacity:0.7;
+font-size:12px;
+margin-top:10px;
+}
+</style>
 </head>
+
 <body>
-  <h1>سلام 🌸</h1>
-  <p>سایت من آنلاین شد!</p>
+
+<canvas id="matrix"></canvas>
+
+<div class="container">
+
+<h1>LORD KABIR SATELLITE SYSTEM</h1>
+
+<div class="orbit">
+<div class="satellite"></div>
+</div>
+
+<div class="orbit orbit2">
+<div class="satellite"></div>
+</div>
+
+<div class="orbit orbit3">
+<div class="satellite"></div>
+</div>
+
+<div class="earth"></div>
+
+<div class="status">
+GLOBAL SIGNAL: CONNECTED<br>
+SATELLITE LINK: ACTIVE<br>
+TRACKING MODE: SIMULATION
+</div>
+
+<div class="panel">
+> scanning orbit...<br>
+> satellite signal stable<br>
+> encryption enabled
+</div>
+
+<div class="small">
+CYBER INTERFACE v4.0
+</div>
+
+</div>
+
+<script>
+
+/* MATRIX BACKGROUND */
+const canvas=document.getElementById("matrix");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let letters="01LORDKABIRCYBER";
+let size=14;
+let cols=canvas.width/size;
+let drops=[];
+
+for(let i=0;i<cols;i++) drops[i]=1;
+
+function draw(){
+ctx.fillStyle="rgba(0,0,0,0.05)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="#00ff66";
+ctx.font=size+"px monospace";
+
+for(let i=0;i<drops.length;i++){
+let text=letters[Math.floor(Math.random()*letters.length)];
+ctx.fillText(text,i*size,drops[i]*size);
+
+if(drops[i]*size>canvas.height && Math.random()>0.975){
+drops[i]=0;
+}
+drops[i]++;
+}
+}
+
+setInterval(draw,30);
+
+</script>
+
 </body>
 </html>
