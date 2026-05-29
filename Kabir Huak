@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LORD KABIR</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:black;
+overflow:hidden;
+font-family:Consolas;
+color:#00ff66;
+}
+
+/* MATRIX BACKGROUND */
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+}
+
+/* NAVBAR */
+
+.navbar{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,0.6);
+border-bottom:1px solid #00ff66;
+backdrop-filter:blur(10px);
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+text-shadow:0 0 20px #00ff66;
+}
+
+.menu{
+display:flex;
+gap:20px;
+}
+
+.menu a{
+color:#00ff66;
+text-decoration:none;
+transition:0.3s;
+}
+
+.menu a:hover{
+text-shadow:0 0 10px #00ff66;
+}
+
+/* CENTER */
+
+.center{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+width:90%;
+}
+
+/* TITLE */
+
+.title{
+font-size:60px;
+text-shadow:0 0 25px #00ff66;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%{opacity:0.5;}
+50%{opacity:1;}
+100%{opacity:0.5;}
+}
+
+.subtitle{
+margin-top:10px;
+font-size:18px;
+opacity:0.8;
+}
+
+/* TERMINAL */
+
+.terminal{
+margin:30px auto;
+padding:20px;
+width:90%;
+max-width:800px;
+height:250px;
+overflow:auto;
+border:1px solid #00ff66;
+background:rgba(0,0,0,0.7);
+box-shadow:0 0 20px #00ff66;
+text-align:left;
+}
+
+.line{
+margin-bottom:10px;
+}
+
+/* BUTTON */
+
+.btn{
+display:inline-block;
+margin-top:20px;
+padding:15px 40px;
+border:1px solid #00ff66;
+color:#00ff66;
+text-decoration:none;
+transition:0.3s;
+box-shadow:0 0 15px #00ff66;
+}
+
+.btn:hover{
+background:#00ff66;
+color:black;
+}
+
+/* INFO BOXES */
+
+.boxes{
+margin-top:30px;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+}
+
+.box{
+width:220px;
+padding:20px;
+border:1px solid #00ff66;
+background:rgba(0,255,100,0.05);
+box-shadow:0 0 15px #00ff66;
+}
+
+/* FOOTER */
+
+.footer{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+padding:10px;
+text-align:center;
+border-top:1px solid #00ff66;
+background:rgba(0,0,0,0.5);
+font-size:12px;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="navbar">
+
+<div class="logo">
+LORD KABIR
+</div>
+
+<div class="menu">
+<a href="#">HOME</a>
+<a href="#">SYSTEM</a>
+<a href="#">NETWORK</a>
+<a href="#">ACCESS</a>
+</div>
+
+</div>
+
+<div class="center">
+
+<div class="title">
+CYBER CONTROL PANEL
+</div>
+
+<div class="subtitle">
+GLOBAL NETWORK CONNECTED
+</div>
+
+<div class="terminal">
+
+<div class="line">> initializing system...</div>
+<div class="line">> connecting satellites...</div>
+<div class="line">> firewall active...</div>
+<div class="line">> cyber network online...</div>
+<div class="line">> access granted...</div>
+
+</div>
+
+<a href="#" class="btn">
+ENTER SYSTEM
+</a>
+
+<div class="boxes">
+
+<div class="box">
+<h3>SERVER</h3>
+ONLINE
+</div>
+
+<div class="box">
+<h3>NETWORK</h3>
+SECURE
+</div>
+
+<div class="box">
+<h3>SIGNAL</h3>
+99%
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+LORD KABIR CYBER SYSTEM v9.0
+</div>
+
+<script>
+
+/* MATRIX EFFECT */
+
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const letters = "01LORDKABIRCYBER";
+const fontSize = 16;
+const columns = canvas.width / fontSize;
+
+const drops = [];
+
+for(let x = 0; x < columns; x++){
+drops[x] = 1;
+}
+
+function draw(){
+
+ctx.fillStyle = "rgba(0,0,0,0.05)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle = "#00ff66";
+ctx.font = fontSize + "px monospace";
+
+for(let i = 0; i < drops.length; i++){
+
+const text = letters[Math.floor(Math.random()*letters.length)];
+
+ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+
+if(drops[i]*fontSize > canvas.height && Math.random() > 0.975){
+drops[i] = 0;
+}
+
+drops[i]++;
+}
+
+}
+
+setInterval(draw,35);
+
+window.addEventListener("resize",()=>{
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+});
+
+</script>
+
+</body>
+</html>
